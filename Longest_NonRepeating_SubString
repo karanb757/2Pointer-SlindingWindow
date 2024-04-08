@@ -1,0 +1,33 @@
+//BRUTE FORCE APPROACH
+#include<bits/stdc++.h>
+using namespace std;
+
+int LongestSubstring(string s){
+
+    int maxlen=INT_MIN;
+
+    for(int i=0; i<s.size(); i++){
+        int hash[256]={0};
+
+        for(int j=i; j<s.size(); j++){
+            
+            if(hash[s[j]]==1) break;
+
+            int len=j-i+1;
+            maxlen=max(len,maxlen);
+
+            hash[s[j]]=1; 
+        }
+    }
+    return maxlen;
+}
+
+int main(){
+    string s="cadbzabcd";
+    
+    int k = LongestSubstring(s);
+    cout<<"length of longest substring : "<<k;
+    return 0;
+}
+
+//OPTIMAL APPROACH
