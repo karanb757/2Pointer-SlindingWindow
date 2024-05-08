@@ -1,0 +1,64 @@
+//BRUTE FORCE -> O(N²)
+#include<bits/stdc++.h>
+using namespace std;
+
+function FruitInBasket(int arr[],int k){
+    int maxLen=0;
+
+    for(int i=0; i<n; i++){
+      set<int> st;
+        
+        for(int j=i; j<n; j++){
+        st.insert(arr[j]);
+
+        if(st.size()<=2){
+          maxlen=max(maxlen,j-i+1);
+            }
+        else break;
+        }
+    }
+
+    return maxLen;
+}
+
+int main(){
+    int k=2;
+    int arr[]={3,3,3,1,2,1,1,2,3,3,4}
+    int n=sizeof(arr)/sizeof(arr[0]);
+
+    FruitInBasket(arr,k);
+
+}
+
+//OPTIMAL SOLUTION -> O(N)
+#include<bits/stdc++.h>
+using namespace std;
+
+int FruitInBasket(int arr[],int k,int n){
+    int l=0,r=0,maxLen=0;
+    map<int,int> mpp;
+
+    while(r<n){
+        mpp[arr[r]]++;
+
+        if(mpp.size()>k){
+            mpp[arr[l]]--;
+            if(mpp[arr[l]]==0) mpp.erase(mpp[arr[l]]);
+            l++;
+        }
+        if(mpp.size()<=k){
+            maxLen=max(maxLen,r-l+1);
+            r++;
+        }
+    }
+    return maxLen;
+}
+
+int main(){
+    int k=2;
+    int arr[]={3,3,3,1,2,1,1,1,2,3,3,4};
+    int n=sizeof(arr)/sizeof(arr[0]);
+
+    cout<<FruitInBasket(arr,k,n);
+    return 0;
+}
